@@ -1,28 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using System.Collections.Immutable;
+using System.Linq;
 
-namespace MiniAnalyzers.SimpleRefactors
+namespace MiniAnalyzers.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class EnumAnalyzer : DiagnosticAnalyzer
     {
-        public const string DiagnosticId = "EnumMultipleValues";
+        public const string DiagnosticId = "BA00007";
         private static readonly LocalizableString Title = "Enum has multiple elements with value 0!";
         private static readonly LocalizableString MessageFormat = "Enum has multiple elements with value 0!";
         private static readonly LocalizableString Description = "The first element of an enum has the value of 0 if there is no explicit value but this enum already contains an element with the value 0!";
-        private const string Category = "BME";
+        private const string Category = "Structure";
 
         private static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Title, MessageFormat, Category, DiagnosticSeverity.Info, isEnabledByDefault: true, description: Description);
 
 
-        
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
         public override void Initialize(AnalysisContext context)
@@ -36,11 +33,11 @@ namespace MiniAnalyzers.SimpleRefactors
 
             var enumMembers = enumNode.Members;
 
-            bool firstHasNoValue = false;
-            bool existValueWith0 = false;
+            var firstHasNoValue = false;
+            var existValueWith0 = false;
             SyntaxNode erroneousNode = null;
 
-            for (int i = 0; i < enumMembers.Count(); ++i)
+            for (var i = 0; i < enumMembers.Count(); ++i)
             {
                 var member = enumMembers[i];
                 if (i == 0)

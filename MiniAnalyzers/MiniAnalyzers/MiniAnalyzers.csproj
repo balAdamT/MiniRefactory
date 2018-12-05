@@ -34,22 +34,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="SimpleRefactors\EnumAnalyzer.cs" />
-    <Compile Include="SimpleRefactors\EnumFixProvider.cs" />
-    <Compile Include="SimpleRefactors\InitializerListAnalyzer.cs" />
-    <Compile Include="SimpleRefactors\InitializerListCodeFix.cs" />
+    <Compile Include="Rules\EnumAnalyzer.cs" />
+    <Compile Include="Rules\EnumFixProvider.cs" />
+    <Compile Include="Rules\InitializerListAnalyzer.cs" />
+    <Compile Include="Rules\InitializerListCodeFixProvider.cs" />
+    <Compile Include="Rules\PrivateMethodNameAnalyzer.cs" />
+    <Compile Include="Rules\PrivateMethodNameCodeFix.cs" />
+    <Compile Include="Rules\PropertyDocumentationAnalyzer.cs" />
+    <Compile Include="Rules\PublicMethodNameAnalyzer.cs" />
+    <Compile Include="Rules\PublicMethodNameCodeFix.cs" />
+    <Compile Include="Rules\SingleLineCommentSentenceAnalyzer.cs" />
+    <Compile Include="Rules\SingleLineCommentSentenceCodeFix.cs" />
+    <Compile Include="Rules\VarDeclarationAnalyzer.cs" />
+    <Compile Include="Rules\VarDeclarationCodeFix.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <Compile Include="tools\GeneratedCodeAnalysisExtensions.cs" />
+    <Compile Include="tools\StringExtensions.cs" />
+    <Compile Include="tools\SyntaxTriviaExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Diagnostic.nuspec">
@@ -57,13 +58,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-    <None Include="tools\install.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="tools\uninstall.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
